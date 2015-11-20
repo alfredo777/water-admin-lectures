@@ -1,0 +1,16 @@
+<script type="text/javascript" src="js/database.js"></script>
+{{#each inspects}}
+<div class="denuce">
+  <div class="titledenunce" id="inspect-{{Id}}">Inspección {{@index}}</div>
+  <p><b>Nombre:</b>{{name}}</p><p><b>Dirección: </b>{{address}}</p><p><b>Inconformidad: </b>{{inconforme}}</p><p><b>Cuenta:</b>{{acount}}</p><p><b>Medidor: </b>{{meter}}</p>
+</div>
+<script type="text/javascript">
+   $("#inspect-{{Id}}").click(function(){
+     extractQuery("inspects", "Id", {{Id}}, function(callback){
+      var inspect = callback;
+      loadDBTPL(inspect, 'inspect_view', 'internal-loader');
+     });
+   });
+</script>
+
+{{/each}}

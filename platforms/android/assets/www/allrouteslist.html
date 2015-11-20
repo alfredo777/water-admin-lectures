@@ -1,0 +1,27 @@
+<script type="text/javascript" src="js/session_admin.js"></script>
+<script type="text/javascript" src="js/conection_whit_api.js"></script>
+<script type="text/javascript" src="js/database.js"></script>
+<main class="mdl-layout__content settings">
+<p class="title">{{title}}</p>
+{{#each routes}}
+<div class="calendar-day" id="li-routes-{{Id}}">
+  <div class="calendar-date">
+    <span>{{@index}}</span>
+    <span>
+    </span>
+  </div>
+  <div class="calendar-activity teal mdl-shadow--1dp">
+    <span>{{business_name}}</span>
+    <span class="calendar-hour">{{address}}</span>
+  </div>
+  <div class="clr"></div>
+  <script type="text/javascript">
+     $("#li-routes-{{Id}}").click(function(){
+       extractQuery("routes", "Id", {{Id}}, function(callback){
+         loadDBTPL(callback, 'open_route', 'internal-loader');        
+       });
+     });
+  </script>
+</div>
+{{/each}}
+</main>
