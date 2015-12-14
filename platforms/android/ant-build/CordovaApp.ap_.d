@@ -55,6 +55,7 @@
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/res \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/route-changes.html \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/signing_contract.html \
+/Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/sincronize.html \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/spec \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/spec.html \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/css/adavanced.css \
@@ -70,10 +71,13 @@
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/fonts/fontawesome-webfont.woff \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/fonts/fontawesome-webfont.woff2 \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/fonts/FontAwesome.otf \
+/Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/img/cloud.svg \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/img/contrato.svg \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/img/icons.png \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/img/icons.svg \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/img/inspect.svg \
+/Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/img/load.GIF \
+/Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/img/load.png \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/img/loading.GIF \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/img/login.png \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/img/logo.png \
@@ -94,6 +98,7 @@
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/js/routes.js \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/js/session_admin.js \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/js/signature.js \
+/Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/js/sincronization.js \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/js/sweet.js \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/js/sweetalert.min.js \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/plugins/org.apache.cordova.camera \

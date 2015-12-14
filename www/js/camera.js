@@ -16,25 +16,40 @@ function onDeviceReady() {
 //
 function onPhotoDataSuccess(imageData) {
     var url = "data:image/jpeg;base64," + imageData;
-    var rand = Math.floor((Math.random() * 100) + 1);
+    var rand = Math.floor((Math.random() * 10100) + 1);
+    var data = {
+        "url": String(url),
+        "rand": rand
+    }
+    var idpath = window.localStorage.getItem("lecturex");
+    console.log(idpath);
+    putsformDBTPL(data, "image_context", "images-adding"+idpath);
+    $('#submitimages').show();
+}
+
+function onPhotoDataSuccessNoRoute(imageData) {
+    var url = "data:image/jpeg;base64," + imageData;
+    var rand = Math.floor((Math.random() * 10100) + 1);
     var data = {
         "url": String(url),
         "rand": rand
     }
     putsformDBTPL(data, "image_context", "images-adding");
-    $('#submitimages').show();
 }
 
 // Called when a photo is successfully retrieved
 //
 function onPhotoURISuccess(imageURI) {
     var url = imageURI;
-    var rand = Math.floor((Math.random() * 100) + 1);
+    var rand = Math.floor((Math.random() * 10100) + 1);
     var data = {
         "url": String(url),
         "rand": rand
     }
-    putsformDBTPL(data, "image_context", "images-adding");
+
+    var idpath = window.localStorage.getItem("lecturex");
+    console.log(idpath);
+    putsformDBTPL(data, "image_context", "images-adding"+idpath);
     $('#submitimages').show();
 }
 
@@ -42,6 +57,13 @@ function onPhotoURISuccess(imageURI) {
 //
 function capturePhoto(callback) {
     navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+        quality: 50,
+        destinationType: destinationType.DATA_URL
+    });
+}
+
+function capturePhotoNoRoute(callback) {
+    navigator.camera.getPicture(onPhotoDataSuccessNoRoute, onFail, {
         quality: 50,
         destinationType: destinationType.DATA_URL
     });

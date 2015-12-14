@@ -21,8 +21,6 @@ $(document).ready(function() {
                 }, 1000);
             });
 
-
-
         });
 
         return false;
@@ -31,6 +29,7 @@ $(document).ready(function() {
     // sincronizacion de la base de datos
 
     $('#sincornize').submit(function() {
+        var usercard = $( "input:first" ).val();
         var $form = $(this),
             url = $form.attr('action'),
             formData = $form.serialize();
@@ -39,12 +38,12 @@ $(document).ready(function() {
                 return alert("Error...");
             dropTable("routes");
             dropTable("images");
+            window.localStorage.setItem("lecture", "0");
             $.each(data, function(i, item) {
-                var dt = data[i]
-                compose_data = [dt.id, dt.business_name, dt.address, dt.colony, dt.water_meter, dt.diameter, dt.reference, dt.observations, dt.sx, dt.ux, dt.stage, dt.account_number, dt.abnormalities, dt.lecture, dt.data_access, dt.reading_assignment_id, dt.successfully_completed]
+                var dt = data[i];
+                var compose_data = [dt.id, dt.business_name, dt.address, dt.colony, dt.water_meter, dt.diameter, dt.reference, dt.observations, dt.sx, dt.ux, dt.stage, dt.account_number, dt.abnormalities, dt.lecture, dt.data_access, dt.reading_assignment_id, dt.successfully_completed, dt.last_read]
                 var insertion = insertData(compose_data, "routes", myDataBase, Schema, false);
             });
-
             setTimeout(function() {
                 var reports = {
                     "titles": "Todos los reportes",
@@ -53,10 +52,22 @@ $(document).ready(function() {
                 }
                 loadDBTPL(reports, 'reportslist', 'internal-loader');
             }, 500);
+
+            $('#sincornize-inspects').submit();
+        });
+
+        calllInspects(usercard, function(data, err){
+            $.each(data, function(i, item) {
+                var dt = data[i];
+                var compose_data = [dt.id, dt.name, dt.address, dt.inconforme, dt.acount, dt.meter, dt.t_ser, dt.additional_data, dt.date, dt.visit_date, dt.general_inspect, dt.shooting_conditions, dt.home_room, dt.number_of_people, dt.ordeno_prueba_de_inspeccion, dt.property_activity, dt.anomalies, dt.meter_conditions, dt.additional_report];
+                var insertion = insertData(compose_data, "inspects", myDataBase, Schema, false);
+            });
         });
         return false;
     });
 
+    
+    
     // actualizacion de ruta
 
     $('#route-update').submit(function() {
@@ -85,12 +96,12 @@ $(document).ready(function() {
 
 
     // ajax function to call
-
+    
     function stablishConnection(url, formData, callback) {
         console.log(url);
         console.log(formData);
-        //var callurl = "http://localhost:3000/"+url;
-        var callurl = "http://192.168.1.110:3000/" + url;
+        //var callurl = "http://192.168.1.116:3000/" + url;
+        var callurl = "http://wateradmin.rockstars.mx/" + url;
 
         $.ajax({
             url: callurl,
@@ -108,4 +119,25 @@ $(document).ready(function() {
             }
         });
     };
+
+    function calllInspects(usercard, callback){
+        var callurl = "http://192.168.1.116:3000/" + "mobile/call_all_inspects"+"?card="+usercard;
+        console.log(callurl);
+
+         $.ajax({
+            url: callurl,
+            processData: false,
+            contentType: false,
+            dataType: 'jsonp',
+            type: 'GET',
+            success: function(data) {
+                callback(data, null);
+                console.log(data);
+            },
+            error: function(err) {
+                callback(null, err);
+            }
+        });
+
+    }
 });

@@ -6,7 +6,7 @@
 var dateinsert = new Date().toLocaleString();
 $('#data_access').val(dateinsert);
 </script>
-<main class="mdl-layout__content settings">
+<main class="mdl-layout__content settings" style="margin-bottom:250px;">
 <p class="title">Ruta - {{business_name}} </p>
 <p style="padding:20px;">Instrucciones: <br/>
 1) Es necesario que llenes todos los campos antes de enviar.<br/>
@@ -43,7 +43,7 @@ $('#data_access').val(dateinsert);
         <li><b>Anormalidades:</b><input type="text" id="abnormalities" placeholder="Ingresa cualquier anormalidad" value="{{abnormalities}}" data-idx="{{Id}}" required></li>
         {{/if}}
         {{#if lecture}}
-        <li><b>Referencia:</b> {{lecture}}</li>
+        <li><b>Lectura:</b> {{lecture}}</li>
         {{else}}
         <li><b>Lectura:</b> <input type="text" id="lecture" placeholder="Ingresa la lectura" value="{{lecture}}" data-idx="{{Id}}" required> </li>
         {{/if}}

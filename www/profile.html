@@ -21,16 +21,6 @@
           <span>Reportes de inspección</span>
           <div class="clr"></div>
         </li>
-        <li>
-          <div style="float:left; width:10%;" onclick="loadDBTPL(reports, 'allreports', 'internal-loader')" ><img src="img/reporte.svg"></img></div>
-          <span>Reportes de insidencias encontradas</span>
-          <div class="clr"></div>
-        </li>
-        <li>
-          <div style="float:left; width:10%;" onclick="loadDBTPL(reports, 'allcontracts', 'internal-loader')" ><img src="img/contrato.svg"></img></div>
-          <span>Ver contratos</span>
-          <div class="clr"></div>
-        </li>
       </ul>
       </main>
     </div>
@@ -45,23 +35,15 @@
     <i class="fa fa-stumbleupon"></i>
   </div>
   <div class="sp-foo"></div>
-  <div class="tab-foo" onclick="loadDBTPL(reports, 'report', 'internal-loader')">
-    <i class="fa fa-pencil-square-o"></i>
-  </div>
-  <div class="sp-foo"></div>
   <div class="tab-foo" onclick="loadDBTPL(reports, 'inspect', 'internal-loader')">
     <i class="fa fa-user-secret"></i>
-  </div>
-  <div class="sp-foo"></div>
-  <div class="tab-foo" onclick="loadDBTPL(reports, 'contract', 'internal-loader')">
-    <i class="fa fa-file-text"></i>
   </div>
   <div class="sp-foo"></div>
   <div class="tab-foo" onclick="$('#sincornize').submit();">
     <i class="fa fa-download"></i>
   </div>
   <div class="sp-foo"></div>
-  <div class="tab-foo">
+  <div class="tab-foo" onclick="loadDBTPL(reports, 'sincronize', 'internal-loader')">
     <i class="fa fa-upload"></i>
   </div>
   <div class="sp-foo"></div>

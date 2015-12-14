@@ -8,9 +8,9 @@ var Schema = {
         "procesor": "(?,?,?,?,?)"
     },
     "routes": {
-        "accessor": "(Id,business_name,address,colony,water_meter,diameter,reference,observations,sx,ux,stage,account_number,abnormalities,lecture,data_access,reading_assignment_id,successfully_completed)",
-        "progresor": "(Id INTEGER PRIMARY KEY,business_name VARCHAR(255),address VARCHAR(255),colony VARCHAR(50),water_meter VARCHAR(50),diameter VARCHAR(50),reference VARCHAR(50),observations VARCHAR(255),sx VARCHAR(50),ux VARCHAR(50),stage VARCHAR(50),account_number VARCHAR(50),abnormalities VARCHAR(50),lecture VARCHAR(50),data_access VARCHAR(50),reading_assignment_id INTEGER,successfully_completed BOOLEAN)",
-        "procesor": "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        "accessor": "(Id,business_name,address,colony,water_meter,diameter,reference,observations,sx,ux,stage,account_number,abnormalities,lecture,data_access,reading_assignment_id,successfully_completed,last_read)",
+        "progresor": "(Id INTEGER PRIMARY KEY,business_name VARCHAR(255),address VARCHAR(255),colony VARCHAR(50),water_meter VARCHAR(50),diameter VARCHAR(50),reference VARCHAR(50),observations VARCHAR(255),sx VARCHAR(50),ux VARCHAR(50),stage VARCHAR(50),account_number VARCHAR(50),abnormalities VARCHAR(50),lecture VARCHAR(50),data_access VARCHAR(50),reading_assignment_id INTEGER,successfully_completed BOOLEAN, last_read VARCHAR(50))",
+        "procesor": "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
     },
     "images": {
         "accessor": "(img,imageable_id,imageable_type)",
@@ -23,9 +23,9 @@ var Schema = {
         "procesor": "(?,?,?,?)"
     },
     "inspects": {
-        "accessor": "(name,address,inconforme,acount,meter,t_ser,additional_data,date,visit_date,general_inspect,shooting_conditions,home_room,number_of_people,ordeno_prueba_de_inspeccion,property_activity,anomalies,meter_conditions,additional_report)",
-        "progresor": "(Id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(255), address VARCHAR(255), inconforme VARCHAR(255), acount VARCHAR(255), meter VARCHAR(255), t_ser VARCHAR(255), additional_data VARCHAR(255), date VARCHAR(255), visit_date VARCHAR(255), general_inspect VARCHAR(255), shooting_conditions VARCHAR(255), home_room VARCHAR(255), number_of_people VARCHAR(255), ordeno_prueba_de_inspeccion VARCHAR(255), property_activity VARCHAR(255), anomalies VARCHAR(255), meter_conditions VARCHAR(255), additional_report VARCHAR(255))",
-        "procesor": "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+        "accessor": "(Id,name,address,inconforme,acount,meter,t_ser,additional_data,date,visit_date,general_inspect,shooting_conditions,home_room,number_of_people,ordeno_prueba_de_inspeccion,property_activity,anomalies,meter_conditions,additional_report)",
+        "progresor": "(Id INTEGER PRIMARY KEY, name VARCHAR(255), address VARCHAR(255), inconforme VARCHAR(255), acount VARCHAR(255), meter VARCHAR(255), t_ser VARCHAR(255), additional_data VARCHAR(255), date VARCHAR(255), visit_date VARCHAR(255), general_inspect VARCHAR(255), shooting_conditions VARCHAR(255), home_room VARCHAR(255), number_of_people VARCHAR(255), ordeno_prueba_de_inspeccion VARCHAR(255), property_activity VARCHAR(255), anomalies VARCHAR(255), meter_conditions VARCHAR(255), additional_report VARCHAR(255))",
+        "procesor": "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
     },
     "service_contracts": {
          "accessor": "(drinking_water,sewage_system,acount,meter,diameter,applicant_name,address,colony,phone,bussiness_name,rfc,commercial_bussines,legal_representative,type_service,legal_title)",
@@ -160,6 +160,7 @@ function callAllQuery(table, callback) {
         },
         function(tx, error) {
             console.log('1.Something went wrong: ' + error);
+            callback(error);
         });
 }
 
