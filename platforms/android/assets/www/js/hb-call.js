@@ -100,3 +100,8 @@ Handlebars.registerHelper('trimString', function(passedString) {
 Handlebars.registerHelper('index_of', function(context,ndx) {
   return context[ndx];
 });
+
+Handlebars.registerHelper("inc", function(value, options)
+{
+    return parseInt(value) + 1;
+});

@@ -27,7 +27,6 @@ function updateLecture() {
             console.log(id);
             var data_images = [value, id, type];
             var im = insertData(data_images, "images", myDataBase, Schema, false);
-            console.log(data_images);
           });
           loadDBTPL(callback, 'open_route', 'internal-loader');
           polimorfismQuery("images", id, "routes", function(callback){

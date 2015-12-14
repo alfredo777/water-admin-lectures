@@ -87,6 +87,7 @@
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/js/conection_whit_api.js \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/js/contract.js \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/js/database.js \
+/Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/js/formsteps.js \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/js/function.js \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/js/geolocalization.js \
 /Users/macdejarda/Documents/capama/capama-mobile/water-admin/platforms/android/assets/www/js/handlebars-v4.0.2.js \

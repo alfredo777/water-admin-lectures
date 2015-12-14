@@ -1,27 +1,27 @@
-function createInspect(){
-  console.log("Inspección");
-  var compose_data = [];
+function updateInspect(idx){
+  var idx = idx;
+
   $('#createinspect input[type=text]').each(function(i) {
     var input = $(this);
-    var id = input.attr('id');
-    var value = input.val();
-    console.log(value);
-    var asignation = input.data('asignation');
-    if (asignation == "form") {
-      compose_data.push(String(value));
+    var field = input.attr('id');
+    var id = input.data('updater');
+    var valuex = input.val();
+    console.log(field);
+    console.log(valuex);
+    console.log(id);
+    if (valuex != ""){
+    updateQuery("inspects",field,valuex,id);
     }
   });
-  console.log(compose_data);
-  insertData(compose_data,"inspects",myDataBase,Schema,false);  
-  createImagesForInspects();
+
+  createImagesForInspects(idx);
+  alert("Se ha generado la inspección");
 
 }
 
-function createImagesForInspects(){
-  lastRegisterQuery("inspects", function(callback){
-    var id = callback.Id;
+function createImagesForInspects(id){
+    var id = id;
     var type = "inspects";
-    var inspect = callback;
     console.log(id);
     console.log('Creando Imagenes');
     $('#images-adding input[type=text]').each(function(i) {
@@ -34,8 +34,11 @@ function createImagesForInspects(){
       var im = insertData(data_images, "images", myDataBase, Schema, false);
       console.log(data_images);
     });
+
     setTimeout(function(){
-    loadDBTPL(inspect, 'inspect_view', 'internal-loader');
-    }, 750);
-  });
+      extractQuery("inspects", "Id", id, function(callback){
+      var inspect = callback;
+      loadDBTPL(inspect, 'inspect_view', 'internal-loader');
+     });
+    }, 1000);
 }
