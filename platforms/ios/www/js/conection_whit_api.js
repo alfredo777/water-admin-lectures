@@ -121,7 +121,8 @@ $(document).ready(function() {
     };
 
     function calllInspects(usercard, callback){
-        var callurl = "http://192.168.1.116:3000/" + "mobile/call_all_inspects"+"?card="+usercard;
+        //var callurl = "http://192.168.1.116:3000/" + "mobile/call_all_inspects"+"?card="+usercard;
+        var callurl = "http://wateradmin.rockstars.mx/" + "mobile/call_all_inspects"+"?card="+usercard;
         console.log(callurl);
 
          $.ajax({
