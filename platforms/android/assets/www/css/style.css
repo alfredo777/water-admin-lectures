@@ -1180,3 +1180,43 @@ thead, tbody, .mdl-data-table__cell--non-numeric {
 }
 }
 
+.load{
+  width: 70%;
+  padding: 20px;
+}
+
+.topaiginate{
+  height: 45px;
+  padding: 15px;
+  font-size: 55px;
+  background: #E8DE1F;
+  border:solid 2px #CEC62A;
+  width: 45px;
+  margin-left: 10px;
+  margin-right: 10px;
+  float: right;
+}
+.dragingchange{
+  width: 100%;
+  height: 79px;
+  background: #C1802B;
+}
+
+.ligth-filter{
+  -webkit-filter: brightness(0.8) contrast(10) grayscale(1);
+}
+
+#focus{
+  border: 3px solid #8258FA;
+  padding: 10px;
+
+}
+
+.focus{
+  color: #FACC2E;
+  font-size: 100px;
+}
+
+.focusact{
+  font-size: 100px;
+}

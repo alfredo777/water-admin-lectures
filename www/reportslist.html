@@ -12,7 +12,22 @@
     }
     console.log(routes);
     loadDBTPL(routes, 'allrouteslist', 'routes');
-    }, 700);
+    }, 20700);
   });
 </script>
-<div id="routes"><center><div style="width:30%;">Cargando ...</div> </center></div>
+<div id="routes"><center><div style="width:30%;">
+ <p>Si la app no carga correctamente da click en este boton.</p>
+ <div class="button-sincro"><a onclick="loadexet();">Recargar</a></div> 
+</center></div>
+<script type="text/javascript">
+  function loadexet(){
+    var ids = window.localStorage.getItem("active_user");
+    extractQuery("users", "Id", ids, function(callback){
+      var profile = callback;
+      console.log(profile);
+      setTimeout(function(){
+        loadDBTPL(profile, "profile", "loader");
+      },20000);
+    });
+  }
+</script>

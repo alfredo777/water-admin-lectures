@@ -56,8 +56,29 @@
   border: solid 5px #c9c9c9;
   box-shadow: inset 0 0 0 1px #707070;
   transition: box-shadow 0.3s, border 0.3s;
+  color: #000;
+  font-size: 26px;
   width: 94%;
   font-size: 10px;
+  ::-webkit-input-placeholder {
+   color: #000;
+   font-weight: bold;
+  }
+
+  :-moz-placeholder { /* Firefox 18- */
+     color: #000;  
+     font-weight: bold;
+  }
+
+  ::-moz-placeholder {  /* Firefox 19+ */
+     color: #000;  
+     font-weight: bold;
+  }
+
+  :-ms-input-placeholder {  
+     color: #000;  
+     font-weight: bold;
+  }
 
 }
 .superinput input[type="text"]:focus,
@@ -255,4 +276,105 @@
   line-height: 100px;  
   margin-bottom: 10px; 
   margin-top: 220px; 
+}
+
+
+.button-sincro {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px 24px;
+    border: 6px solid #2799a1;
+    border-radius: 14px;
+    background: #4afff0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#4afff0), to(#268c99));
+    background: -moz-linear-gradient(top, #4afff0, #268c99);
+    background: linear-gradient(to bottom, #4afff0, #268c99);
+    text-shadow: #d19292 0px 0px 0px;
+    font: normal normal bold 32px arial;
+    color: #ffffff;
+    text-decoration: none;
+}
+.button-sincro:hover,
+.button-sincro:focus {
+    border: 6px solid #33c7d1;
+    background: #59ffff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#59ffff), to(#2ea8b8));
+    background: -moz-linear-gradient(top, #59ffff, #2ea8b8);
+    background: linear-gradient(to bottom, #59ffff, #2ea8b8);
+    color: #ffffff;
+    text-decoration: none;
+}
+.button-sincro:active {
+    background: #2c9990;
+    background: -webkit-gradient(linear, left top, left bottom, from(#2c9990), to(#268c99));
+    background: -moz-linear-gradient(top, #2c9990, #268c99);
+    background: linear-gradient(to bottom, #2c9990, #268c99);
+}
+
+.paginate-add{
+    padding: 5%;
+    width: 97%;
+}
+
+.minues{
+  font-size: 45px;
+  float: left;
+}
+
+.max{
+  font-size: 45px;
+  float: right;
+
+}
+
+.button-search {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 9px;
+    margin-left: 4px;
+    border: 1px solid #5c5757;
+    border-radius: 8px;
+    background: #ffffff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffffff));
+    background: -moz-linear-gradient(top, #ffffff, #ffffff);
+    background: linear-gradient(to bottom, #ffffff, #ffffff);
+    text-shadow: #591717 1px 1px 1px;
+    font: normal normal bold 20px arial;
+    color: #ffffff;
+    text-decoration: none;
+}
+.button-search:hover,
+.button-search:focus {
+    border: 1px solid #938b8b;
+    color: #ffffff;
+    text-decoration: none;
+}
+.button-search:active {
+    background: #999999;
+    background: -webkit-gradient(linear, left top, left bottom, from(#999999), to(#ffffff));
+    background: -moz-linear-gradient(top, #999999, #ffffff);
+    background: linear-gradient(to bottom, #999999, #ffffff);
+}
+.button-search:after{
+    content:  "\0000a0";
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    margin: 0 -4px -6px 4px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABmElEQVRIia2Vv2oCQRCHPw6xCiEECXkCCxGLIBJCimAVrFKJIc8kqeSKkCKFhVilsEhhYyspQhAJ+A4SDIgxxhR7i3ODe//IwHLHzuzvm92d3QW3VYE2MAbmwAb4BF6Be6AGeBHjnVYEBoHgNqa9AKU04jdBlnHCsi2AZlLxtRi4ArpAAygAueB7DTwFfhu7AVpR4kWV+QdwFpNQBZiomZRdwQMlfhojbu1EQYbs2fgquw1dJchcWwVYCsiFDmgLZzeluLVHodHRzrFwNjIC6kLjXTvnwlnICDgkXH0hkwcqlxEA4RLP204P+BJBRxnFD9gl9w38SMBMBFYzAuS4GfArASPhvM0IuBP/I+2sEd6gSkrxEuFzcKkDPMytaAMmJK+mY+CNmJNss1goSNxMSkp8CzwjKkhbk3DJLjEntI6pczDVcgU8EF4W2fpElHtLzUS2taPfBXHOpIxZyyRCw2BZ9vl6URAPcyt2MHeLfVxWmP3xMdXiBSJ9B8R3AfZZHvcjn3NAlmkASRLoKcD0PwEW4mMynwLnfzgWv6p3nCLOAAAAAElFTkSuQmCC") no-repeat left center transparent;
+    background-size: 100% 100%;
+}
+
+.lectures-count{
+   font-weight: 30px;
+   padding: 5px;
+   color: #fff;
+   background: #000;
+   width: 240px;
 }

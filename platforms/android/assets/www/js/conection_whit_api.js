@@ -38,11 +38,16 @@ $(document).ready(function() {
                 return alert("Error...");
             dropTable("routes");
             dropTable("images");
+            dropTable("inspects");
             window.localStorage.setItem("lecture", "0");
+            $('.button-sincro').hide();
+            $('.load').show();
             $.each(data, function(i, item) {
+                setTimeout(function(){
                 var dt = data[i];
-                var compose_data = [dt.id, dt.business_name, dt.address, dt.colony, dt.water_meter, dt.diameter, dt.reference, dt.observations, dt.sx, dt.ux, dt.stage, dt.account_number, dt.abnormalities, dt.lecture, dt.data_access, dt.reading_assignment_id, dt.successfully_completed, dt.last_read]
-                var insertion = insertData(compose_data, "routes", myDataBase, Schema, false);
+                 var compose_data = [dt.id, dt.business_name, dt.address, dt.colony, dt.water_meter, dt.diameter, dt.reference, dt.observations, dt.sx, dt.ux, dt.stage, dt.account_number, dt.abnormalities, dt.lecture, dt.data_access, dt.reading_assignment_id, dt.successfully_completed, dt.last_read]
+                 var insertion = insertData(compose_data, "routes", myDataBase, Schema, false);
+                }, 200);
             });
             setTimeout(function() {
                 var reports = {
@@ -51,18 +56,14 @@ $(document).ready(function() {
                     "card": "{{card}}"
                 }
                 loadDBTPL(reports, 'reportslist', 'internal-loader');
-            }, 500);
+            }, 100000);
 
-            $('#sincornize-inspects').submit();
         });
-
-        calllInspects(usercard, function(data, err){
-            $.each(data, function(i, item) {
-                var dt = data[i];
-                var compose_data = [dt.id, dt.name, dt.address, dt.inconforme, dt.acount, dt.meter, dt.t_ser, dt.additional_data, dt.date, dt.visit_date, dt.general_inspect, dt.shooting_conditions, dt.home_room, dt.number_of_people, dt.ordeno_prueba_de_inspeccion, dt.property_activity, dt.anomalies, dt.meter_conditions, dt.additional_report];
-                var insertion = insertData(compose_data, "inspects", myDataBase, Schema, false);
-            });
-        });
+        $('#sincro2').show();
+        $('#sincro1').hide();
+        $('#sincro').hide();
+        $('#load').hide();
+        
         return false;
     });
 
@@ -112,7 +113,6 @@ $(document).ready(function() {
             type: 'GET',
             success: function(data) {
                 callback(data, null);
-                console.log(data);
             },
             error: function(err) {
                 callback(null, err);
@@ -133,7 +133,6 @@ $(document).ready(function() {
             type: 'GET',
             success: function(data) {
                 callback(data, null);
-                console.log(data);
             },
             error: function(err) {
                 callback(null, err);

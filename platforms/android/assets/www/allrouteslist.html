@@ -5,39 +5,88 @@
 <script type="text/javascript" src="js/database.js"></script>
 <main class="mdl-layout__content settings">
 <p class="title">{{title}}</p>
+<div class="mid-form superinput" id="serached" style="display:none; height:70px; margin-bottom:20px;" >
+    <div style="width: 90%; float:left; margin-bottom:20px; ">
+    <input type="text" placeholder="Ingresa el número de cuenta o de medidor" id="search" value=''>
+    </div>
+    <div style="width: 10%; float:left; margin-bottom:20px;">
+    <div class="button-search" id="button-search"></div>
+    </div>
+</div>
+{{#if routes.length}}
+ <div class="dragingchange"><div class="topaiginate" id="topaiginate" data-direction="left"><i class="fa fa-forward"></i></div></div>
 {{#each routes}}
-<div class="lecture" id="{{@index}}" style="display:none;">
+{{#unless lecture}}
+<div class="lecture {{account_number}} {{water_meter}}" id="{{@index}}" style="display:none;" data-indextor="{{inc @index}}" >
+   <div class="paginate-add">
+    <div class="minues" onclick="advancedPaginate({{@index}}, 'minues');"><i class="fa fa-chevron-left"></i></div>
+    <div class="max" onclick="advancedPaginate({{@index}}, 'max');"><i class="fa fa-chevron-right"></i></div>
+  </div>
   <center>
   <div class="round-number">{{inc @index}}</div>
-  <b>Dirección:</b>{{address}}</br>
-  <b>Colonia:</b>{{colony}}</br>
+  <div style="font-size:22px;">
+   Dirección:<b>{{address}}</b></br>
+   Colonia:<b>{{colony}}</b></br>
+   Medidor:<b>{{water_meter}}</b></br>
+   Diametro:<b>{{diameter}}</b></br>
+   Nombre del usuario:<b>{{business_name}}</b></br>
+   Referencia:<b>{{reference}}</b></br>
+   Cuenta:<b> {{account_number}}</b></br>
+  </div>
   </center>
   <div id="route-{{Id}}" class="superinput">
     <div id="step1-{{Id}}">
-      <center>Seleccióne el tipo de dato a insertar</center>
+      <center  style="font-size:22px;">Seleccióne el tipo de dato a insertar</center>
+      <div id="lecture-{{Id}}" class="mid-form" style="display:none;">
+        <div>
+         <h2> <a onclick="$('#firstbuttons{{Id}}').slideToggle(); $('#lecture-{{Id}}').hide();" class="pull-right"><i class="fa fa-times"></i></a></h2>
+        </div>
+        <input type="text" id="lecture{{Id}}" data-name="lecture" placeholder="Ingresa la lectura"  data-idx="{{Id}}" class="lecture{{Id}}" required>
+        <input type="text" id="observations{{Id}}" data-name="observations" placeholder="Ingresa la observaciones"  data-idx="{{Id}}" class="observations{{Id}}" required><br/><br/>
+        <center>
+        <div id="button-round-{{Id}}" class="button-round" data-target="lecture{{Id}}" data-steap="2" data-idx="{{Id}}" data-llec="{{last_read}}" data-times="0"><i class="fa fa-arrow-circle-o-right" style="float:none; margin:2px;" ></i></div>
+        </center>
+      </div>
+      <div id="anomaly-{{Id}}" class="mid-form" style="display:none;">
+        <div>
+         <h2> <a onclick="$('#anomaly-{{Id}}').hide();" class="pull-right"><i class="fa fa-times"></i></a></h2>
+        </div>
+        <select id="select{{Id}}" data-adding="abnormalities{{Id}}" style="font-size:22px;">
+          <option value="0">Sin anomalía</option>
+          <option value="1">Medidor Sucio</option>
+          <option value="2">Toma Cortada sin medidor</option>
+          <option value="3">Toma directa sin madidor</option>
+          <option value="4">Casa cerrada, Medidor dentro</option>
+          <option value="5">Casa deshabitada, Terreno solo</option>
+          <option value="6">Toma inexistente</option>
+          <option value="7">Medidor no registrado</option>
+        </select>
+
+        <div style="display:none;">
+        <input type="text" id="abnormalities{{Id}}" data-name="abnormalities" placeholder="Ingresa cualquier anormalidad"  data-idx="{{Id}}" class="abnormalities{{Id}}" required>
+        </div>
+
+        <script>
+          $( "#select{{Id}}" ).change(function() {
+            var valuesel = $(this).val();
+            $("#abnormalities{{Id}}").attr('value',valuesel);
+          });
+        </script>
+
+      </div>
+
       <div id="firstbuttons{{Id}}">
         <div class="btn-blue-bordered" onclick="openLEcture({{Id}})">Toma de lectura</div>
         <div class="btn-blue-bordered" onclick="openAnomaly({{Id}})">Anomalía</div>
       </div>
-      <div id="lecture-{{Id}}" class="mid-form" style="display:none;">
-        <input type="text" id="lecture{{Id}}" data-name="lecture" placeholder="Ingresa la lectura"  data-idx="{{Id}}" class="lecture{{Id}}" required>
-        <center>
-        <div class="button-round" data-target="lecture{{Id}}" data-steap="2" data-idx="{{Id}}"><i class="fa fa-arrow-circle-o-right" style="float:none; margin:2px;"></i></div>
-        </center>
-      </div>
-      <div id="anomaly-{{Id}}" class="mid-form" style="display:none;">
-        <input type="text" id="abnormalities{{Id}}" data-name="abnormalities" placeholder="Ingresa cualquier anormalidad"  data-idx="{{Id}}" class="abnormalities{{Id}}" required>
-        <center>
-        <div class="button-round" data-target="abnormalities{{Id}}" data-steap="2" data-idx="{{Id}}"><i class="fa fa-arrow-circle-o-right" style="float:none; margin:2px;"></i></div>
-        </center>
-      </div>
+      
     </div>
-    <div id="step2-{{Id}}" style="display:none;">
+    <div id="step2-{{Id}}" style="display:none;" class="laststeap">
           <center><div class="btncamera" onclick="openCature({{Id}});"><i class="fa fa-camera-retro" style="margin:1px; float:none;"></i></div></center>
           <div class="image-form{{Id}}" id="images-adding{{Id}}" style="width:100%; margin-bottom:50px;"></div>
           <center>
-          <div class="button-round-save">
-          <a onclick="validateImages({{Id}}, {{inc @index}})"  ><i class="fa fa-floppy-o" style="margin: 5px; float: none;"></i></a>
+          <div id="clicking-save-{{Id}}" class="button-round-save clicking-save" data-idx="{{Id}}" data-indexroute="{{inc @index}}"  data-idmx="{{@index}}">
+            <i class="fa fa-floppy-o" style="margin: 5px; float: none;"></i>
           </div>
           </center>
           <script type="text/javascript">
@@ -50,16 +99,143 @@
           <input type="text" name="reference" id="reference{{Id}}" placeholder="Ingresa cualquier observación" data-idx="{{Id}}" style="display:none;" value="no">
     </div>
   </div>
+  <center>
+  <div class="lectures-count" >Faltante <div class="faltante"></div></div>
+  </center>
 </div>
+
+
+{{/unless}}
 {{/each}}
+
+<div id="sincro" style="display:none;">
+<center><h3> Has terminado tu ruta para sincronizar es necesario que le des click en sincronizar.</h3>
+  <div class="load" id="load" style="display:none;"><img src="img/loadb.GIF"></div>
+
+  <div class="button-sincro" onclick="sincronizeAllData();">
+    <i class="fa fa-upload"></i> Sincronizar
+  </div>
+  <div id="reload" style="display:none;">
+  <div class="button-sincro" onclick="$('#sincornize').submit();">
+    <i class="fa fa-download"></i> Sincronizar
+  </div>
+  </div>
+</center>
+</div>
+
+{{else}}
+ <center><h3>No hay rutas actualmente sincronizadas a este dispositivo, de click en sincronizar para comenzar.</h3>
+  <div class="load" style="display:none;"><img src="img/loadb.GIF"></div>
+  <div class="button-sincro"  onclick="$('#sincornize').submit();">
+    <i class="fa fa-download"></i> Sincronizar
+  </div>
+ </center>
+{{/if}}
 </main>
 
 <script type="text/javascript">
-  function paginateRoutes(indexroute){
-    $(".lecture").hide();
-    $("#"+indexroute).show();
-    var conf = String(indexroute);
-    window.localStorage.setItem("lecture", conf);
+  $('#button-search').click(function(){
+   var s = $('#search').val();
+   if(s == ''){
+    alert('No hay nada para buscar');
+   }else{
+     var clax = $('.'+ s).attr('id');
+     if (clax == '' || clax == null){
+       alert('No se ha encontrado la busqueda');
+     } else {
+       $(".lecture").hide();
+       $('#'+clax).show();
+       $('#serached').hide();
+     }
+   }
+  });
+
+  $('.topaiginate').click(function(){
+    var direction = $(this).data('direction');
+    if(direction == 'left'){
+       $(this).css('float', 'left');
+       $(this).data('direction', 'right');
+       $(this).html('<i class="fa fa-backward">');
+     }else{
+       $(this).css('float', 'right');
+       $(this).data('direction', 'left');
+       $(this).html('<i class="fa fa-forward">');
+     }
+  });
+
+  function advancedPaginate(id, type){
+    if(type == 'max'){
+      var vidivx = $( '#'+id ).next( ".lecture" );
+      var to_id = vidivx.attr('id');
+    }else{
+      var vidivx = $( '#'+id ).prev( ".lecture" );
+      var to_id = vidivx.attr('id');
+    }
+    if(to_id == undefined){
+      alert("No hay mas registro para paginar");
+    }else{
+      $(".lecture").hide();
+      $('#'+to_id).show(); 
+      window.localStorage.setItem("lecture", to_id);
+    }
+  }
+
+  function paginateRoutes(id){
+
+    var direction = $('.topaiginate').data('direction');
+    var id = id;
+    if(direction == 'left'){
+      var vidivx = $('#'+id ).next( ".lecture" );
+      var to_id = vidivx.attr('id');
+    }else{
+      var vidivx = $('#'+id ).prev( ".lecture" );
+      var to_id = vidivx.attr('id');
+    }
+    if(to_id == undefined){
+      var lecturescount = $('.lecture').length;
+      if(lecturescount == 0){
+        window.localStorage.setItem("sincro", true);
+        $('#sincro').show();
+      }else{
+        if(direction == 'left'){
+          var vidivx = $('#'+id ).prev( ".lecture" );
+          var to_id = vidivx.attr('id');
+           $('.topaiginate').css('float', 'left');
+           $('.topaiginate').data('direction', 'right');
+           $('.topaiginate').html('<i class="fa fa-backward">');
+        }else{
+          var vidivx = $('#'+id ).next( ".lecture" );
+          var to_id = vidivx.attr('id');
+           $('.topaiginate').css('float', 'right');
+           $('.topaiginate').data('direction', 'left');
+           $('.topaiginate').html('<i class="fa fa-forward">');
+        }
+        $(".lecture").hide();
+        $('#'+to_id).show(); 
+        window.localStorage.setItem("lecture", to_id);
+        $("#"+id).remove(); 
+        var lecturescount = $('.lecture').length;
+        if(lecturescount == 0){
+          window.localStorage.setItem("sincro", true);
+          $('#sincro').show();
+          }else{
+          $('.faltante').html(lecturescount);
+        }
+      }
+    }else{
+      $(".lecture").hide();
+      $('#'+to_id).show(); 
+      window.localStorage.setItem("lecture", to_id);
+      $("#"+id).remove(); 
+      var lecturescount = $('.lecture').length;
+      if(lecturescount == 0){
+        window.localStorage.setItem("sincro", true);
+        $('#sincro').show();
+      }
+
+    }
+
+
   }
   
   function openCature(id){
@@ -68,13 +244,30 @@
   }
 
   if (window.localStorage.getItem("lecture") == undefined){
+    var lect = $('.lecture').first();
+    var id_assignes = lect.attr('id');
     window.localStorage.setItem("lecture", "0");
     var lecture = window.localStorage.getItem("lecture");
-    $('#'+lecture).show();
+    var lect = $('.lecture').first();
+    $('.lect').show();
    }else{
     var lecture = window.localStorage.getItem("lecture");
     $('#'+lecture).show();
   }
+
+  var lectuRescount = $('.lecture').length;
+ 
+  if (lectuRescount == 0){
+    window.localStorage.setItem("sincro", true);
+    $('#sincro').show();
+  }else{
+    window.localStorage.setItem("sincro", false);
+    $('.faltante').html(lectuRescount);
+  }
+
+  var lastInput = $(".superinput .laststeap").last();
+
+
 
   function openLEcture(id){
      $('#lecture-'+id).slideToggle('slow');
@@ -83,15 +276,22 @@
 
   function openAnomaly(id){
      $('#anomaly-'+id).slideToggle('slow');
-     $('#firstbuttons'+id).slideToggle();
   }
 
   $('.button-round').click(function(){
+    var timerx = $(this).data('times');
     var target =  $(this).data('target');
     var valuex = $('.'+target).val();
     var Idx =  $(this).data('idx');
     var steap = $(this).data('steap');
+    var lastlecture = $(this).data('llec');
     var idtoGo = "step" + steap + "-" + Idx;
+    var maxl =  lastlecture + (lastlecture * 0.50); 
+    var minl =  lastlecture - (lastlecture * 0.50);
+
+    console.log(lastlecture);
+    console.log(maxl);
+    console.log(minl);
     console.log(idtoGo);
     var notStep = steap - 1;
     console.log(notStep);
@@ -100,22 +300,45 @@
     if (valuex == ''){
       alert('Necesita llenar el campo para continuar');
     }else{
-      $('#'+hideSteap).hide();
-      $('#'+idtoGo).show();
-
+      var valueNumeric = isNaN(valuex);
+      if (valueNumeric == false){
+        if (timerx == 0){
+        if (valuex > maxl || valuex < minl){
+           alert("La cantidad que esta ingresando no cumple con el rango guarde de nuevo para continuar.");
+           $(this).data('times', 1);
+        } else {
+           $('#'+hideSteap).hide();
+           $('#'+idtoGo).show();
+        }
+        }else{
+          $('#'+hideSteap).hide();
+          $('#'+idtoGo).show();
+        }
+      }else{
+        alert("Usted no ha ingresado un número la operación es invalida");
+      }
     }
   });
 
-  function validateImages(id, indexroute){
-    var countimges = $("#step2-"+id+ " img").length;
-    var idupdate = "route-"+id;
+  $('.clicking-save').click(function(){
+    var idDivload = $(this).attr('id');
+    var indentifier = $(this).data('idx');
+    var idm = $(this).data('idmx');
+    validateImages(indentifier, idm, idDivload);
+  });
 
-    if (countimges == 3){
+  function validateImages(id, idm, idDivload){
+    var countimges = $("#step2-"+id+ " img").length;
+    var idupdate = "route-"+id;    
+    if (countimges == 2){
+       $('#'+ idDivload).html('<img src="img/loadd.GIF" style="margin-top:2px;" />');
        updateLecture(idupdate);
-       paginateRoutes(indexroute);
-       alert("Se ha guardado la ruta correctamente");
-    }else{
-      var message = "Actualmente usted ha ingresado "+ countimges + "imagenes el requerido son 3";
+        setTimeout(function(){
+          paginateRoutes(idm);
+        }, 3500);
+       
+    } else {
+      var message = "Actualmente usted ha ingresado "+ countimges + " imagenes el requerido son 2";
       alert(message);
     }
   }
@@ -127,9 +350,6 @@
     var valuex = input.val();
     var field = input.data('name');
     var id = input.data('idx');
-    console.log(field);
-    console.log(valuex);
-    console.log(id);
     if (field != "to_id") {
       if (valuex != "") {
         updateQuery("routes", field, valuex, id);
@@ -155,6 +375,136 @@
   }
 
 
-  
+  function searchLectures(meter){
+    var meter = meter;
+    callAllQuery("routes",function(callback){
+      for (i = 0; i < callback.rows.length; i++) {
+          var itemx = callback.rows.item(i);
+          if (item.meter == meter) {
+
+          }
+          call_all.push(itemx.Id);
+      }
+    }); 
+
+  }
+
+  /*sincronizador*/
+
+  function sincronizeAllData(){
+    var users_to_send;
+    var images_to_send;
+    var routes_to_send;
+    var user_helps_to_send;
+    var inspects_to_send;
+    var service_contracts_to_send;
+    var div = document.getElementById('log');
+    $('#load').show();
+    var pxptimer = []
+    var rowtimer = []
+    callAllQuery('routes', function(callback){
+        var finishProcess = callback.length * 1200;
+        pxptimer.push(finishProcess);
+        if(callback != null){
+          for (i = 0; i < callback.length; i++) {
+              var itemx = callback[i];
+                var formData =  "id="+itemx.Id+"&reference="+itemx.reference+"&observations="+itemx.observations+"&abnormalities="+itemx.abnormalities+"&lecture="+itemx.lecture+"&data_access="+itemx.data_access;
+                var url = "mobile/sincronize_routes";
+                conectToSend(url, formData, function(callback) {
+                  console.log(callback);
+                });
+          }
+        }
+    });
+    setTimeout(function(){
+    callAllQuery('images', function(callback){
+      var finishProcess = callback.length * 2000;
+      rowtimer.push(finishProcess);
+      setTimeout(function(){
+      if(callback != null){
+        for (i = 0; i < callback.length; i++) {
+            var itemx = callback[i];
+            uploadPhoto(itemx.img, itemx.imageable_id, itemx.imageable_type);    
+        }
+      }
+      }, pxptimer[0]);
+    });
+  }, 2000);
+
+
+    setTimeout(function(){
+    var totalTImer = pxptimer[0] + rowtimer[0];
+      setTimeout(function(){
+        alert("Se ha sincronizado la ruta");
+        $('#load').hide();
+        $('#reload').show();
+      }, totalTImer);
+    }, 4000)
+
+    window.localStorage.setItem("sincro", false);
+    
+  }
+
+  function prepareFormToSend(img, imageable_id, imageable_type){
+    $("#img").attr("src",img);
+    var url = $("#img").attr("src");
+    $('#secondimg').val(url);
+    $('#imageable_id').val(imageable_id);
+    $('#imageable_type').val(imageable_type);
+    $('#submit').trigger('click');
+  }
+
+  function win(r) {
+      console.log("Code = " + r.responseCode);
+      console.log("Response = " + r.response);
+      console.log("Sent = " + r.bytesSent);
+
+  }
+
+  function fail(error) {
+      alert("An error has occurred: Code = " = error.code);
+      console.log("upload error source " + error.source);
+      console.log("upload error target " + error.target);
+  }
+
+
+
+  function uploadPhoto(imageURI, imageable_id, imageable_type) {
+        var options = new FileUploadOptions();
+        options.fileKey="file";
+        options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+        options.mimeType="image/jpeg";
+        
+        var params = new Object();
+        params.imageable_id = imageable_id;
+        params.imageable_type = imageable_type;
+        options.params = params;
+
+        var ft = new FileTransfer();
+        ft.upload(imageURI, "http://wateradmin.rockstars.mx/mobile/images", win, fail, options);
+
+  }
+
+
+
+  function conectToSend(url, formData, callback) {
+    var callurl = "http://wateradmin.rockstars.mx/" + url;
+    console.log(formData);
+    $.ajax({
+      url: callurl,
+      data: formData,
+      processData: false,
+      contentType: false,
+      dataType: 'jsonp',
+      type: 'GET',
+      success: function(data) {
+        callback(data, null);
+        console.log(data);
+      },
+      error: function(err) {
+        callback(null, err);
+      }
+    });
+  }
   
 </script>

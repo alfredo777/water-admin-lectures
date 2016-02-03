@@ -1,12 +1,12 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.phonegap.helloworld" version="1.0.0">
-  <name>water-admin</name>
+  <name>Lecturas CAPAMA</name>
   <description>Hello World sample application that responds to the deviceready event.</description>
-  <author href="http://rockstars.mx" email="contact@rockstars.mx">JARDA</author>
+  <author href="http://rockstars.mx" email="contacto@rockstars.mx">JARDA</author>
   <content src="index.html"/>
   <preference name="permissions" value="none"/>
   <preference name="orientation" value="portrait"/>
   <preference name="target-device" value="universal"/>
-  <preference name="fullscreen" value="true"/>
+  <preference name="fullscreen" value="false"/>
   <preference name="webviewbounce" value="true"/>
   <preference name="prerendered-icon" value="true"/>
   <preference name="stay-in-webview" value="false"/>

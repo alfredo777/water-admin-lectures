@@ -1,31 +1,36 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
-    <feature name="Camera">
-        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
-    </feature>
-    <feature name="NetworkStatus">
-        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
-    </feature>
+    <preference name="AndroidPersistentFileLocation" value="Internal" />
     <feature name="File">
         <param name="android-package" value="org.apache.cordova.file.FileUtils" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="FileTransfer">
+        <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
+    </feature>
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
     <feature name="Media">
         <param name="android-package" value="org.apache.cordova.media.AudioHandler" />
     </feature>
-    <feature name="Canvas2ImagePlugin">
-        <param name="android-package" value="org.devgeeks.Canvas2ImagePlugin.Canvas2ImagePlugin" />
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
     </feature>
     <allow-intent href="market:*" />
-    <name>water-admin</name>
+    <name>Lecturas CAPAMA</name>
     <description>Hello World sample application that responds to the deviceready event.</description>
-    <author email="contact@rockstars.mx" href="http://rockstars.mx">JARDA</author>
+    <author email="contacto@rockstars.mx" href="http://rockstars.mx">JARDA</author>
     <content src="index.html" />
     <preference name="permissions" value="none" />
     <preference name="orientation" value="portrait" />
     <preference name="target-device" value="universal" />
-    <preference name="fullscreen" value="true" />
+    <preference name="fullscreen" value="false" />
     <preference name="webviewbounce" value="true" />
     <preference name="prerendered-icon" value="true" />
     <preference name="stay-in-webview" value="false" />
@@ -82,7 +87,6 @@
     <gap:splash gap:platform="ios" height="768" src="www/res/screen/ios/screen-ipad-landscape.png" width="1024" />
     <gap:splash gap:platform="winphone" src="www/res/screen/windows-phone/screen-portrait.jpg" />
     <access origin="*" />
-    <plugin name="cordova-plugin-whitelist" version="1" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-navigation href="http://*/*" />

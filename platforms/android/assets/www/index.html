@@ -44,7 +44,6 @@ under the License.
     <script type="text/javascript" src="js/hb-call.js"></script>
     <script type="text/javascript" src="js/session_admin.js"></script>
     <script type="text/javascript" src="js/conection_whit_api.js"></script>
-    <script type="text/javascript" src="js/sincronization.js"></script>
     <script type="text/javascript" src="js/database.js"></script>
   </head>
   <body>
@@ -59,15 +58,15 @@ under the License.
       <span>Ingresa a tu cuenta</span>
     </div>
   </div>
-  <div class="account-data" style="height:50%;"> <!-- text fields -->
+  <div class="account-data" style="height:50%;"> <!-- text fields juan10249 12345678 -->
   <form action="mobile/login" id="login" method="get" enctype="multipart/form-data">
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-      <input class="mdl-textfield__input" type="text" id="card" name="card" value="juan10249" />
+      <input class="mdl-textfield__input" type="text" id="card" name="card"/>
       <label class="mdl-textfield__label" for="sample1">Ingresa tu ID de usuario</label>
     </div>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-      <input class="mdl-textfield__input" type="password" id="password" name="password"  value="12345678"/>
-      <label class="mdl-textfield__label" for="sample2">Ingresa tu contraseña</label>
+      <input class="mdl-textfield__input" type="password" id="password" name="password"/>
+      <label class="mdl-textfield__label" for="sample2" value="juan10249" >Ingresa tu contraseña</label>
     </div>
     <div class="clr"></div>
     <input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary right" type="submit" value="Sincronizar Usuario">
@@ -76,28 +75,42 @@ under the License.
 </div>
 </main>
 <div id="loader" style="display:none;">
- <center><div style="width:30%;"> Cargando ...</div> </center>
+ <center><div style="width:30%;"> Cargando ...</div> <br/><br/>
+ <p>Si la app no carga correctamente da click en este boton.</p>
+ <div class="button-sincro"><a onclick="loadexet();">Recargar</a></div>
+ </center>
 </div>
 </body>
 </html>
 <script type="text/javascript">
-$(document).ready(function(){
-//window.localStorage.clear("active_user");
-if (window.localStorage.getItem("active_user") != null){
-$('#loader').show();
-var ids = window.localStorage.getItem("active_user");
-console.log(ids);
-extractQuery("users", "Id", ids, function(callback){
-  var profile = callback;
-  console.log(profile);
-  setTimeout(function(){
-    loadDBTPL(profile, "profile", "loader");
-  },700);
-});
+  $(document).ready(function(){
+      if (window.localStorage.getItem("active_user") != null){
+      $('#loader').show();
+      var ids = window.localStorage.getItem("active_user");
+        console.log(ids);
+        extractQuery("users", "Id", ids, function(callback){
+          var profile = callback;
+          console.log(profile);
+          setTimeout(function(){
+            loadDBTPL(profile, "profile", "loader");
+          }, 1000);
+          
+        });
+        }else{
+           console.log("sin sessión");
+           $("#login-div").show();
+      }
 
-}else{
-console.log("sin sessión");
-$("#login-div").show();
+  });
+
+function loadexet(){
+  var ids = window.localStorage.getItem("active_user");
+  extractQuery("users", "Id", ids, function(callback){
+    var profile = callback;
+    console.log(profile);
+    setTimeout(function(){
+      loadDBTPL(profile, "profile", "loader");
+    },1000);
+  });
 }
-});
 </script>

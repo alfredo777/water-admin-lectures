@@ -23,8 +23,14 @@ function onPhotoDataSuccess(imageData) {
     }
     var idpath = window.localStorage.getItem("lecturex");
     console.log(idpath);
-    putsformDBTPL(data, "image_context", "images-adding"+idpath);
-    $('#submitimages').show();
+    var image_lenght = $('#'+"images-adding"+idpath+ " img").length;
+    if (image_lenght == 2){
+       alert("Has exedido el número de imagenes permitido");
+    }else{
+      putsformDBTPL(data, "image_context", "images-adding"+idpath);
+      $('#submitimages').show();  
+    }
+    
 }
 
 function onPhotoDataSuccessNoRoute(imageData) {
